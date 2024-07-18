@@ -886,7 +886,6 @@ func (p *OAuthProxy) OAuthCallback(rw http.ResponseWriter, req *http.Request) {
 
 	err = p.enrichSessionState(req.Context(), session)
 	if err != nil {
-		fmt.Printf(err.Error())
 		if err.Error() == "user is missing required team" {
 			logger.PrintAuthf(session.Email, req, logger.AuthFailure, "Invalid authentication via OAuth2: unauthorized. User is missing required team")
 			p.ErrorPage(rw, req, http.StatusForbidden, "Invalid authentication: user is missing required team")
