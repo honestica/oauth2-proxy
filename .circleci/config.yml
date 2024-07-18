@@ -1,0 +1,23 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@1.5.0
+  bot: lifen/bot@0 # locked on major version
+
+workflows:
+  build:
+    jobs:
+      - docker/hadolint:
+          dockerfiles: Dockerfile
+          # DL3006: Always tag the version of an image explicitly
+          # SC2059 : Don't use variables in the printf format string. Use printf '..%s..' "$foo"
+          ignore-rules: 'DL3006,SC2059'
+      - bot/docker-build-and-push:
+          name: build-ci-docker-image
+          context: org-global
+          dockerTag: $CIRCLE_SHA1
+          requires:
+            - docker/hadolint
+          filters:
+            branches:
+              only:
+                - "master"
