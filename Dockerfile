@@ -2,7 +2,7 @@
 # the FROM statements and overall Dockerfile
 #
 # Argument for setting the build image
-ARG BUILD_IMAGE=docker.io/library/golang:1.22-bookworm
+ARG BUILD_IMAGE=docker.io/library/golang:1.23-bookworm
 # Argument for setting the runtime image
 ARG RUNTIME_IMAGE=gcr.io/distroless/static:nonroot
 # Argument for setting the oauth2-proxy build version
